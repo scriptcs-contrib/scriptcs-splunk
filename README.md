@@ -13,6 +13,7 @@ A scriptcs wrapper for [Splunk's] (http://www.splunk.com) new [C# Client] (https
 Splunk's Client is designed to be used with .NET 4.5's async/await keywords. To use async/await in scriptcs on Windows requires explicitly enabling the Mono engine. 
 * To load a script file using the Mono engine use: `scriptcs -modules "mono" start.csx`
 * To load the REPL using the Mono engine use the -r swtich: `scriptcs -modules "mono" -r`
+
 Note: You do not have to use async/await for ScriptCs.Splunk. However you will need to access the Result object on any methods that return a Task in order to get the value.
 # Install
 `scriptcs -install ScriptCs.Splunk`
