@@ -32,6 +32,15 @@ namespace ScriptCs.Splunk.Tests
                 session.Verify(s => s.ImportNamespace("System.Reactive"));
                 session.Verify(s => s.ImportNamespace("System.Reactive.Concurrency"));
             }
+
+            [Theory, ScriptCsAutoData]
+            public void AddsReferencesToTheSession([Frozen] Mock<IScriptPackSession> session, ScriptPack scriptPack)
+            {
+                ((IScriptPack)scriptPack).Initialize(session.Object);
+                session.Verify(s => s.AddReference("System.Threading.Tasks"));
+                session.Verify(s => s.AddReference("System.Runtime"));
+                session.Verify(s => s.AddReference("System.Dynamic.Runtime"));
+            }
         }
     }
 }
