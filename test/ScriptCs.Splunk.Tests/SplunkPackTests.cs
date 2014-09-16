@@ -44,14 +44,5 @@ namespace ScriptCs.Splunk.Tests
                 pack.CreateService().ShouldNotBeNull();
             }
         }
-
-        public class TheCreateServiceAndLogingMethod
-        {
-            [Theory, ScriptCsAutoData]
-            public void CreatesANewServiceAndLogsIn(SplunkPack pack)
-            {
-                //var service = pack.CreateServiceAndLogin();
-            }
-        }
     }
 }
