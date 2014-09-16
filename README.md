@@ -56,15 +56,11 @@ args.Host = "localhost";
 args.Source="scriptcs";
 args.SourceType="_json";
 
-var stream = new MemoryStream();
-var writer = new StreamWriter(stream);
+var batch = new List<string>();
 
-for(int i= 1; i<=10; i++) {
-	var splunkEvent = "{\"time\":\"" + DateTime.UtcNow + "\", \"message\":\"Test\", \"count\":" + i + "}";
-	writer.WriteLine(splunkEvent);
+for(int i=1; i <= 10; i ++) {
+  var splunkEvent = "{\"time\":\"" + DateTime.UtcNow + "\", \"message\":\"Test\", \"count\":" + i + "}";
+  batch.Add(splunkEvent);
 }
-writer.Flush();
-stream.Position = 0;
-service.Transmitter.SendAsync(stream, "main", args).Wait();
+service.StreamEventsAsync(batch, "main", args);
 ```
-
