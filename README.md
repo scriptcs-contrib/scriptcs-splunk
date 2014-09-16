@@ -46,7 +46,7 @@ args.Source="scriptcs";
 args.SourceType="_json";
 
 var splunkEvent = "{\"time\":\"" + DateTime.UtcNow + "\", \"message\":\"Test\"}";
-service.Transmitter.SendAsync(splunkEvent, "main", args).Wait();
+service.SendAsync(splunkEvent, "main", args).Wait();
 ```
 
 *Streaming a batch of JSON events*
