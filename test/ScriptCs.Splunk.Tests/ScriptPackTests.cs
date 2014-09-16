@@ -31,6 +31,7 @@ namespace ScriptCs.Splunk.Tests
                 session.Verify(s => s.ImportNamespace("Splunk.Client"));
                 session.Verify(s => s.ImportNamespace("System.Reactive"));
                 session.Verify(s => s.ImportNamespace("System.Reactive.Concurrency"));
+                session.Verify(s => s.ImportNamespace("System.Reactive.Linq"));
             }
 
             [Theory, ScriptCsAutoData]

@@ -30,6 +30,7 @@ namespace ScriptCs.Splunk
             session.ImportNamespace("Splunk.Client");
             session.ImportNamespace("System.Reactive");
             session.ImportNamespace("System.Reactive.Concurrency");
+            session.ImportNamespace("System.Reactive.Linq");
 
             session.AddReference("System.Threading.Tasks");
             session.AddReference("System.Runtime");
