@@ -38,7 +38,7 @@ results.ToObservable()
   );
 ```
 
-*Sending an invidual JSON event*
+*Sending an individual JSON event*
 ```csharp
 var args = new TransmitterArgs();
 args.Host = "localhost";
@@ -49,7 +49,7 @@ var splunkEvent = "{\"time\":\"" + DateTime.UtcNow + "\", \"message\":\"Test\"}"
 service.Transmitter.SendAsync(splunkEvent, "main", args).Wait();
 ```
 
-*Streaming JSON events*
+*Streaming a batch of JSON events*
 ```csharp
 var args = new TransmitterArgs();
 args.Host = "localhost";
