@@ -1,0 +1,10 @@
+﻿# Splunk host (default: localhost)
+host=testhost
+# Splunk admin port (default: 8089)
+port=1000
+# Splunk username
+username=testuser
+# Splunk password
+password=testpass
+# Access scheme (default: https)
+scheme=http
