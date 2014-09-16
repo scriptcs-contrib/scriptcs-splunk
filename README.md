@@ -14,7 +14,7 @@ A scriptcs wrapper for [Splunk's] (http://www.splunk.com) new [C# Client] (https
 `scriptcs -install ScriptCs.Splunk`
 
 # Scripting examples
-Running a search export
+*Running a search export*
 ```csharp
 var splunk = Require<SplunkPack>();
 splunk.LoadConfig(); 
@@ -25,7 +25,7 @@ foreach(var result in results) {
 }
 ```
 
-Running a search export using Rx
+*Running a search export using Rx*
 ```csharp
 var splunk = Require<SplunkPack>();
 splunk.LoadConfig(); 
@@ -37,7 +37,7 @@ results.ToObservable()
   );
 ```
 
-Streaming JSON events
+*Streaming JSON events*
 ```csharp
 var splunk = Require<SplunkPack>();
 splunk.LoadConfig(); 
