@@ -2,7 +2,7 @@ scriptcs-splunk
 ===============
 
 # What is it?
-A scriptcs wrapper for [Splunk's] (http://www.splunk.com) new [C# Client] (https://github.com/splunk/splunk-sdk-csharp-pcl). You can use it interactively for working with Splunk via the REPL, or use it for automation within your scripts.
+A scriptc pack for [Splunk's] (http://www.splunk.com) new [C# Client] (https://github.com/splunk/splunk-sdk-csharp-pcl). You can use it interactively for working with Splunk via the REPL, or use it for automation within your scripts.
 
 # Features
 * Perform Splunk searches, send events directly to Splunk, and perform simple management tasks. 
