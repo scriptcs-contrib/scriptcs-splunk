@@ -14,11 +14,15 @@ A scriptcs wrapper for [Splunk's] (http://www.splunk.com) new [C# Client] (https
 `scriptcs -install ScriptCs.Splunk`
 
 # Scripting examples
-*Running a search export*
+*Connecting to a Splunk instance using the default .splunkrc file*
 ```csharp
 var splunk = Require<SplunkPack>();
 splunk.LoadConfig(); 
 var service = splunk.CreateServiceAndLogin(); 
+```
+
+*Running a search export*
+```csharp
 var results = service.ExportSearchResultsAsync("search index=_internal | head 10").Result;
 foreach(var result in results) {
 	Console.WriteLine(result.GetValue("_raw"));
@@ -27,9 +31,6 @@ foreach(var result in results) {
 
 *Running a search export using Rx*
 ```csharp
-var splunk = Require<SplunkPack>();
-splunk.LoadConfig(); 
-var service = splunk.CreateServiceAndLogin(); 
 var results = service.ExportSearchResultsAsync("search index=_internal | head 10").Result;
 results.ToObservable()
   .Subscribe(
@@ -37,12 +38,19 @@ results.ToObservable()
   );
 ```
 
+*Sending an invidual JSON event*
+```csharp
+var args = new TransmitterArgs();
+args.Host = "localhost";
+args.Source="scriptcs";
+args.SourceType="_json";
+
+var splunkEvent = "{\"time\":\"" + DateTime.UtcNow + "\", \"message\":\"Test\"}";
+service.Transmitter.SendAsync(splunkEvent, "main", args).Wait();
+```
+
 *Streaming JSON events*
 ```csharp
-var splunk = Require<SplunkPack>();
-splunk.LoadConfig(); 
-var service = splunk.CreateServiceAndLogin(); 
-
 var args = new TransmitterArgs();
 args.Host = "localhost";
 args.Source="scriptcs";
@@ -55,12 +63,8 @@ for(int i= 1; i<=10; i++) {
 	var splunkEvent = "{\"time\":\"" + DateTime.UtcNow + "\", \"message\":\"Test\", \"count\":" + i + "}";
 	writer.WriteLine(splunkEvent);
 }
-
 writer.Flush();
 stream.Position = 0;
-
 service.Transmitter.SendAsync(stream, "main", args).Wait();
-
-Console.WriteLine("Sent");
 ```
 
