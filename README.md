@@ -36,3 +36,31 @@ results.ToObservable()
     Observer.Create<SearchResult>(r => Console.WriteLine(r.GetValue("_raw")))
   );
 ```
+
+Streaming JSON events
+```csharp
+var splunk = Require<SplunkPack>();
+splunk.LoadConfig(); 
+var service = splunk.CreateServiceAndLogin(); 
+
+var args = new TransmitterArgs();
+args.Host = "localhost";
+args.Source="scriptcs";
+args.SourceType="_json";
+
+var stream = new MemoryStream();
+var writer = new StreamWriter(stream);
+
+for(int i= 1; i<=10; i++) {
+	var splunkEvent = "{\"time\":\"" + DateTime.UtcNow + "\", \"message\":\"Test\", \"count\":" + i + "}";
+	writer.WriteLine(splunkEvent);
+}
+
+writer.Flush();
+stream.Position = 0;
+
+service.Transmitter.SendAsync(stream, "main", args).Wait();
+
+Console.WriteLine("Sent");
+```
+
